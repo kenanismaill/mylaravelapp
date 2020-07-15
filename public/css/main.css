@@ -1,0 +1,49 @@
+.new-post{
+    padding: 16px 0;
+    border-bottom:1px solid #ccc;
+}
+
+.new-post header,
+.posts header{
+    margin-bottom: 20px;
+    font-style: oblique;
+
+}
+.posts.post{
+    padding-left: 10px;
+    border-left: 3px solid #4c110f;
+    margin-bottom: 20px;
+
+}
+
+.posts.post.info{
+    color: #000000;
+    font-style: italic;
+
+}
+
+.bg
+{
+    width: 100%;
+    z-index: 0;
+}
+
+.error{
+    border: 1px solid red;
+    background-color: #c8cbcf;
+    color: red;
+}
+.error,.success
+{
+    text-align: center;
+}
+.error ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.success{
+    border: 1px solid green;
+    background-color: #c8cbcf;
+    color: green;
+}
