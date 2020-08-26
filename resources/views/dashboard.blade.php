@@ -13,13 +13,18 @@
 
             </header>
             <br>
-            <form action="{{route('createpost')}}" method="post">
+            <form action="{{route('createpost')}}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group">
                     <textarea class="form-control" rows="5" placeholder="your idea" name="body"
                               id="new-post"></textarea>
                 </div>
+                <div class="form-group">
+
+                    <input type="file" name="image" placeholder="image">
+                </div>
                 <button type="submit" class="btn btn-primary">Post</button>
-                <input type="hidden" name="_token" value="{{Session::token() }}">
+{{--                <input type="hidden" name="_token" value="{{Session::token() }}">--}}
             </form>
         </div>
     </section>
@@ -29,6 +34,9 @@
             <header><h3> What other people think .... </h3></header>
             @foreach($posts as $post)
                 <article class="post" data-postid="{{ $post->id }}">
+                    <div style="margin-left: 300px;margin-bottom: 20px">
+                        <img src=" {{ asset('postimage/'.$post['image']) }}"  width="250"  style="background: #1d78cb" height="150"/>
+                    </div>
                     <p style="border-radius: 20px; border: black 1px solid; margin-bottom: 10px; margin-right: 10px;text-align: center"> {{ $post->body }}</p>
                     <div class="info">
                         posted By {{ $post->user->first_name }} on {{ $post->created_at}}

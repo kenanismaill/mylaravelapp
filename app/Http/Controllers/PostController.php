@@ -17,18 +17,33 @@ class PostController extends Controller
     }
     public function createPost(Request $request)
     {
+
+//        return $request;
+        $file_name = $this -> saveImage($request ->image,'postimage');
+//        return $file_name;
+
         // some validation
         $this->validate($request,[
-           'body'=>'required|max:1500'
+           'body'=>'required|max:1500',
+            'image'=>'required'
         ]);
-        $post=new Post();
-        $post->body= $request['body'];
-        $message='There was an error';
-        if ($request->user()->posts()->save($post))
-        {
-            $message='Your idea has successfully posted :)';
-        }
-        return redirect()->route('dashboard')->with(['message'=>$message]);
+
+        Post::create([
+            'body'=> $request->body,
+            'image'=> $file_name,
+            'user_id'=>Auth::user()->id,
+
+        ]);
+
+//        $post=new Post();
+//        $post->body= $request['body'];
+//        $post->image=$file_name;
+//        $message='There was an error';
+//        if ($request->user()->posts()->save($post))
+//        {
+//            $message='Your idea has successfully posted :)';
+//        }
+        return redirect()->route('dashboard')->with(['message'=>'save']);
     }
 
     public function deletePost($post_id)
@@ -93,5 +108,15 @@ class PostController extends Controller
         $likeCount = Like::where('post_id', $post_id)->where('like', 1)->count();
         $dislikeCount = Like::where('post_id', $post_id)->where('like', 0)->count();
         return response()->json(['likeCount' => $likeCount, 'dislikeCount' => $dislikeCount], 200);
+    }
+
+    protected function saveImage($photo, $folder)
+    {
+        $file_extension = $photo->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = $folder;
+        $photo->move($path, $file_name);
+        return $file_name;
+
     }
 }
