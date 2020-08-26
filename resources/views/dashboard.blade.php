@@ -35,8 +35,8 @@
                     </div>
 
                     <div class="interaction">
-                        <a href="#" class="like">Like</a>|
-                        <a href="#" class="like">Dislike</a>|
+                        <a class="like" href="#">{{App\Like::where('post_id', $post->id)->where('like', 1)->count()}} likes</a> |
+                        <a class="like" href="#">{{App\Like::where('post_id', $post->id)->where('like', 0)->count()}} dislikes</a>|
                         @if(Auth::user()==$post->user)
                             <a href="#" class="edit">Edit</a>|
                             <a href="{{ route('deletepost',['post_id'=>$post->id]) }}">Delete</a>
@@ -77,6 +77,6 @@
     <script>
         var token =' {{Session::token()}}'
         var urledit ='{{ route('edit') }}';
-        var urllike ='{{ route('like') }}';
+        var urlLike ='{{ route('like') }}';
     </script>
 @endsection

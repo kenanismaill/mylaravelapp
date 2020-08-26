@@ -11,8 +11,9 @@
 <div class="container">
     @yield('content')
 </div>
+<br><br><br>
 <!-- Footer -->
-<footer class="page-footer font-small indigo" style="background-color: #385d7a;margin-top: 30px">
+<footer class="page-footer font-small indigo" style="background-color: #385d7a;margin-top: 150px">
 
     <!-- Footer Links -->
     <div class="container text-center text-md-left">

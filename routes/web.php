@@ -69,4 +69,9 @@ Route::group(['middleware'=>['web']],function (){
        'uses'=>'UserController@getuserImage',
        'as'=>'account.image'
     ]);
+    Route::post('/like',[
+        'uses'=>'PostController@postLikePost',
+        'as'=>'like'
+    ]);
+
 });
